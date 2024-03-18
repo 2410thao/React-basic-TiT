@@ -1,47 +1,54 @@
 import React from 'react';
+import ChildComponent from './ChildComponent';
 class Mycomponent extends React.Component {
 
     //key:value
     state={
-        name : 'Thaodepzai',
-        channel: 'thaoviStore'
+       firstName: '',
+       lastName: ''
     }
 
-
-    handleOnChangeName=(event) => {
+    handleFirstName=(event)=>{
         this.setState({
-            name: event.target.value
-        });
+            firstName: event.target.value
+           
+        })
     }
 
-    handleClickButton=()=>{
-        alert('Click me')
+    handleLastName=(event)=>{
+        this.setState({
+            lastName: event.target.value
+        })
     }
 
+    handleSubmit=(event)=>{
+        event.preventDefault()
+        console.log('>> click submit ',this.state)
+    }
     /*
     JSX => return block
     fragment
     */
     render() {
 
-        let name = 'Thao';
+        console.log('>>> call render: ', this.state)
         return(
             <>
 
-             <div className='thu1'>
-                <input value={this.state.name} type='text' onChange={(event)=> this.handleOnChangeName(event)}/>
-               Shop Say hi! {this.state.channel}
-            </div>
+            <form>
+                <label htmlFor="fname">First name:</label><br/>
+                <input type="text" value={this.state.firstName} onChange={(event)=>this.handleFirstName(event)}/><br/>
+                <label htmlFor="lname">Last name:</label><br/>
+                <input type="text" value={this.state.lastName} onChange={(event)=>this.handleLastName(event)}/><br/><br/>
+                <input type="submit" value="Submit" onClick={(event)=>this.handleSubmit(event)}/>
+            </form> 
 
-            <div className='thu2'>
-                Hello TiT, my name is {this.state['name']}
-            </div>
-
-            <div className='thu3'>
-                <button onClick={()=>{this.handleClickButton()}}>Click me</button>
-            </div>
-            </>
+            <ChildComponent name={'1'}/>
+            <ChildComponent name={'2'}/>
+            <ChildComponent name={'3'}/>
            
+            </>
+        
         )
     }
 
